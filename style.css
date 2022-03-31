@@ -1,0 +1,45 @@
+/*
+Theme Name: Ramstech
+Theme URI: http://ramstech.id/themes/YayasanIslamNgudimulyo
+Author: ramstech team
+Author URI: http://ramstech.id/
+Description: Ramstech solution provide theme wordpress custom
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: ramstech, green, blog, yayasan, islam
+Text Domain: ramstechYayasanIslamNgudimulyo
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+.fa-2x {
+    font-size: 2em !important;
+}
+p.card-text{
+    line-height: normal;
+}
+.main-sidebar .sidebar-menu  .addin-social li a{
+    position: unset !important;
+      /*width: unset !important;*/
+}
+.addin-social a {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 3px 0 0 0 !important;
+    display: inline-block !important;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+    background-color: #6777ef;
+    color: white !important;
+}
+.addin-social a i {
+    margin-left: 2px !important;
+}
+.addin-social a:hover {
+    background-color: #fb160a !important;
+}
+textarea.form-control{
+    height: auto !important;
+}
