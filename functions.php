@@ -1,5 +1,12 @@
 <?php
-function add_theme_script(){
+function addin_theme_support()
+{
+	add_theme_support("custom-logo");
+	add_theme_support("post-thumbnails");
+}
+add_action('after_setup_theme','addin_theme_support');
+
+function addin_add_theme_script(){
 	$baseTheme = get_template_directory_uri();
 	
 	# csss
@@ -17,4 +24,84 @@ function add_theme_script(){
 	wp_enqueue_script("other","{$baseTheme}/assets/core/js/scripts.js","jquery");
 }
 
-add_action("wp_enqueue_scripts","add_theme_script");
+add_action("wp_enqueue_scripts","addin_add_theme_script");
+
+function addin_menus() {
+	
+	$locations = array(
+		'primary'  => __( 'Sidebar Menu', 'addin' ),
+	);
+	
+	register_nav_menus( $locations );
+}
+
+add_action( 'init', 'addin_menus' );
+
+# add menu admin are
+function addin_create_post_type() {
+	// set up labels
+	$labels = array(
+ 		'name' => 'Blog',
+    	'singular_name' => 'Blog',
+    	'add_new' => 'Tambah',
+    	'add_new_item' => 'Tambah Artikel',
+    	'edit_item' => 'Ubah',
+    	'new_item' => 'Tambah',
+    	'all_items' => 'Semua',
+    	'view_item' => 'Lihat',
+    	'search_items' => 'Search Post',
+    	'not_found' =>  'No Post Found',
+    	'not_found_in_trash' => 'No Post found in Trash', 
+    	'parent_item_colon' => '',
+    	'menu_name' => 'Blog Post',
+    );
+    //register post type
+	register_post_type( 'blog', array(
+		'labels' => $labels,
+		'has_archive' => true,
+ 		'public' => true,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail','page-attributes' ),
+		'taxonomies' => array( 'post_tag', 'category' ),	
+		'exclude_from_search' => false,
+		'capability_type' => 'post',
+		'rewrite' => array( 'slug' => 'blog' ),
+		"menu_icon"=>"dashicons-rss"
+		)
+	);
+
+	$labelsProject = array(
+ 		'name' => 'Portofolio',
+    	'singular_name' => 'project',
+    	'add_new' => 'Tambah',
+    	'add_new_item' => 'Tambah',
+    	'edit_item' => 'Ubah',
+    	'new_item' => 'Tambah',
+    	'all_items' => 'Semua',
+    	'view_item' => 'Lihat',
+    	'search_items' => 'Search Post',
+    	'not_found' =>  'No Post Found',
+    	'not_found_in_trash' => 'No Post found in Trash', 
+    	'parent_item_colon' => '',
+    	'menu_name' => 'Portofolio',
+    );
+    //register post type
+	register_post_type( 'project', array(
+		'labels' => $labelsProject,
+		'has_archive' => true,
+ 		'public' => true,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail','page-attributes' ),
+		'taxonomies' => array( 'post_tag', 'category' ),	
+		'exclude_from_search' => false,
+		'capability_type' => 'post',
+		'rewrite' => array( 'slug' => 'project' ),
+		"menu_icon" => "dashicons-portfolio"
+		)
+	);
+}
+add_action( 'init', 'addin_create_post_type' );
+
+#style css pagination
+function addin_posts_link_attributes(){
+    return "class='page-link'";
+}
+add_filter("next_posts_link_attributes", 'addin_posts_link_attributes');
