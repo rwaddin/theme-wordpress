@@ -28,7 +28,6 @@
                             $customLogo = get_theme_mod("custom_logo");
                             $logo = wp_get_attachment_image_src($customLogo);
                         }
-
                         ?>
 						<img src="<?= $logo[0] ?>" alt="" class="img-fluid rounded-circle w-50">
 					</li>
