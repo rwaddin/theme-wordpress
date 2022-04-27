@@ -1,30 +1,3 @@
-<?php
-// $args = array(
-//   'post_type' => 'blog', // enter custom post type
-//   'orderby' => 'date',
-//   'order' => 'DESC',
-// );
-
-// $loop = new WP_Query( $args );
-// if( $loop->have_posts() ):
-// while( $loop->have_posts() ): $loop->the_post(); global $post;
-//   echo '<div class="portfolio">';
-//   echo '<h3>' . get_the_title() . '</h3>';
-//   echo '<div class="portfolio-image">'. get_the_post_thumbnail( $id ).'</div>';
-//   echo '<div class="portfolio-work">'. get_the_content().'</div>';
-
-//   $authorid = $post->post_author;
-//   $date = get_the_date();
-//   $author = get_the_author_meta("user_nicename", $authorid);
-
-//   echo "<br>";
-//   echo "author : {$author} <br>";
-//   echo  'date : '.$date;
-//   echo '</div>';
-// endwhile;
-// endif;
-?>
-
 <div class="row">
     <?php
     $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -32,9 +5,8 @@
         'post_type' => 'blog',
         'orderby' => 'date',
         'order' => 'DESC',
-        "posts_per_page"=> 1,
+        "posts_per_page"=> 6,
         "paged" => $paged,
-//        'cat'=>1
     ];
     $query = new WP_Query($params);
     if ($query->have_posts()):
@@ -54,10 +26,13 @@
                         </div>
 
                         <?php
-                        echo '<i class="fa fa-tags"></i>';
-                        $tags = get_the_tags($id);
-                        foreach ($tags as $tag) {
-                            echo ' &nbsp;'.$tag->name.',&nbsp;';
+                        $getTags = get_the_tags($id);
+                        if ($getTags){
+	                        $tags = array_map(function ($tag){
+		                        return $tag->name;
+	                        }, $getTags);
+	                        $x = implode(",&nbsp;", $tags);
+	                        echo '<i class="fa fa-tags"></i> '.$x;
                         }
                         ?>
                     </div>
@@ -79,12 +54,12 @@
 </div>
 
 <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <?php previous_posts_link('Newest Posts') ?>
+    <ul class="pagination justify-content-between">
+        <li class="page-item">
+            <?php previous_posts_link('<span class="dashicons dashicons-arrow-left-alt"></span> Previous') ?>
         </li>
         <li class="page-item">
-            <?php next_posts_link('Older Entries', $query->max_num_pages); ?>
+            <?php next_posts_link('Next <span class="dashicons dashicons-arrow-right-alt"></span>', $query->max_num_pages); ?>
         </li>
     </ul>
 </nav>

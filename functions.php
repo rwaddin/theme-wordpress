@@ -4,6 +4,7 @@ function addin_theme_support()
 	add_theme_support("custom-logo");
 	add_theme_support("post-thumbnails");
 }
+
 add_action('after_setup_theme','addin_theme_support');
 
 function addin_add_theme_script(){
@@ -55,6 +56,7 @@ function addin_create_post_type() {
     	'parent_item_colon' => '',
     	'menu_name' => 'Blog Post',
     );
+	
     //register post type
 	register_post_type( 'blog', array(
 		'labels' => $labels,
@@ -101,7 +103,12 @@ function addin_create_post_type() {
 add_action( 'init', 'addin_create_post_type' );
 
 #style css pagination
-function addin_posts_link_attributes(){
+function addin_next_posts_link_attributes(){
     return "class='page-link'";
 }
-add_filter("next_posts_link_attributes", 'addin_posts_link_attributes');
+add_filter("next_posts_link_attributes", 'addin_next_posts_link_attributes');
+
+function addin_previous_posts_link_attributes(){
+    return "class='page-link'";
+}
+add_filter("previous_posts_link_attributes", 'addin_previous_posts_link_attributes');
