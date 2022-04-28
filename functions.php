@@ -1,4 +1,6 @@
 <?php
+require get_template_directory()."/lib/util.php";
+
 function addin_theme_support()
 {
 	add_theme_support("custom-logo");

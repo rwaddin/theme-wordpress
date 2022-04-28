@@ -13,11 +13,11 @@
                 <p>Want to know how I may help your project? Check out my <a href="">project portfolio</a> and <a href="">online resume</a>.
                 </p>
 
-                <button class="btn btn-warning"><i class="fas fa-chalkboard-teacher"></i> View Portofolio</button>
-                <button class="btn btn-success"><i class="fas fa-id-card"></i> View Resume</button>
+                <a class="btn btn-warning" href="<?= site_url("project"); ?>"><i class="fas fa-chalkboard-teacher"></i> View Portofolio</a>
+                <a class="btn btn-success" href="<?= site_url("resume"); ?>"><i class="fas fa-id-card"></i> View Resume</a>
             </div>
             <div class="col col-sm-4">
-                <img src="/addin/assets/images/avatar-1.png" alt="" class="img-fluid img-thumbnail">
+                <img src="<?= get_template_directory_uri(); ?>/assets/avatar.png" alt="" class="img-fluid img-thumbnail">
             </div>
         </div>
     </div>

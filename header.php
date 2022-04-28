@@ -15,15 +15,15 @@
 		<div class="main-sidebar sidebar-style-2">
 			<aside id="sidebar-wrapper">
 				<div class="sidebar-brand">
-					<a href="index.html"><?= get_bloginfo("name") ?></a>
+					<a href="<?= site_url(); ?>"><?= get_bloginfo("name") ?></a>
 				</div>
 				<div class="sidebar-brand sidebar-brand-sm">
-					<a href="index.html">AS</a>
+					<a href="<?= site_url(); ?>">AS</a>
 				</div>
 				<ul class="sidebar-menu">
 					<li class="text-center">
                         <?php
-                        $logo = "http://localhost:88/addin/assets/images/avatar-1.png";
+                        $logo = get_template_directory_uri()."/assets/avatar.png";
                         if(function_exists('the_custom_logo')){
                             $customLogo = get_theme_mod("custom_logo");
                             $logo = wp_get_attachment_image_src($customLogo);
@@ -55,7 +55,7 @@
 				</ul>
 
 				<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-					<a href="?p=contact" class="btn btn-primary btn-lg btn-block btn-icon-split">
+					<a href="<?= site_url("contact"); ?>" class="btn btn-primary btn-lg btn-block btn-icon-split">
 						<i class="far fa-paper-plane"></i> Hire Me
 					</a>
 				</div>
